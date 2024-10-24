@@ -1,3 +1,13 @@
+"""
+    @file        cam_stream.py
+    @author      Mowibox (Ousmane THIONGANE)
+    @brief       Live camera stream display
+    @version     1.0
+    @date        2024-10-24
+    
+"""
+
+# Includes
 import cv2
 import time
 import subprocess
@@ -5,7 +15,10 @@ from flask import Flask, Response
 
 app = Flask(__name__)
 
-def get_cpu_temp():
+def get_cpu_temp() -> str:
+    """
+    Returns the Raspberry Pi CPU temperature
+    """
     temp_cmd = subprocess.run(['vcgencmd', 'measure_temp'], capture_output=True, text=True)
     temp_str = temp_cmd.stdout
     temp = temp_str.split('=')[1].split("'")[0]
@@ -13,22 +26,26 @@ def get_cpu_temp():
 
 
 def generate_frames():
+    """
+    Generates the frames for the camera stream
+    """
     camera = cv2.VideoCapture(0)
     camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
+    # Variables for FPS
     prev_frame_time = 0
     new_frame_time = 0
 
     while True:
         success, frame = camera.read()
-        frame = cv2.flip(frame,0)
+
+        # Necessary regarding the actual Chromapi's camera setup
+        frame = cv2.flip(frame, 0)
         frame = cv2.flip(frame, 1)
         if not success:
             break
         
-
-
         new_frame_time = time.time()
         fps = 1/(new_frame_time - prev_frame_time)
         prev_frame_time = new_frame_time
