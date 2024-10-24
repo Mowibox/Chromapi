@@ -45,6 +45,12 @@ def shutdown_all_servos():
     
 if __name__ == "__main__":
     time.sleep(2)
+    set_servo_angle(0, 90)
+    time.sleep(2)
+    set_servo_angle(0, 25)
+    time.sleep(2)
+    shutdown_all_servos()
+    time.sleep(1)
     move_all_servos()
     shutdown_all_servos()
     set_servo_angle(10, 180)
@@ -82,7 +88,7 @@ if __name__ == "__main__":
         GPIO.output(GPIO_LED_L, GPIO.LOW)
         GPIO.output(GPIO_LED_R, GPIO.LOW)
         time.sleep(0.3)
-    time.sleep(35)
+    time.sleep(1)
     set_servo_angle(8, 0)
     set_servo_angle(9, 90)
     set_servo_angle(2, 180)
