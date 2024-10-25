@@ -23,24 +23,6 @@ Once connected to the Raspberry Pi, I launch the updates:
 ```
 sudo apt update && sudo apt upgrade
 ```
-
-Then, I edited the configuration file:
-```
-sudo nano /boot/firmware/config.txt 
-```
-
-I commented the line on the '[pi4]' section:
-```
-dtoverlay=vc4-fkms-v3d
-```
-
-And I uncommented the line on the '[pi02]' section:
-```
-dtoverlay=vc4-kms-v3d,cma-128
-```
-
-I then saved and exited the configuration file.
-
 As Ubuntu does not have raspi-config natively, we have to install it manually:
 
 ```
