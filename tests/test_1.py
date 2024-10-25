@@ -1,5 +1,5 @@
 """
-    @file        demo.py
+    @file        test_1.py
     @author      Mowibox (Ousmane THIONGANE)
     @brief       Simple test to check Chromapi functionalities
     @version     1.0
@@ -66,33 +66,40 @@ def shutdown_all_servos():
     for channel in range(NUM_OF_CHANNELS):
         servo_shutdown(channel)
     
+
 if __name__ == "__main__":
-    time.sleep(1)
-    move_all_servos()
-    shutdown_all_servos()
-    set_servo_angle(10, 180)
-    set_servo_angle(11, 180)
-    set_servo_angle(3, 180)
-    set_servo_angle(1, 0)
-    time.sleep(1)
-    for _ in range(3):
-        set_servo_angle(8, 90)
-        set_servo_angle(9, 180)
+    try:
+        time.sleep(1)
+        move_all_servos()
+        shutdown_all_servos()
+        set_servo_angle(10, 180)
+        set_servo_angle(11, 180)
+        set_servo_angle(3, 180)
+        set_servo_angle(1, 0)
+        time.sleep(1)
+        for _ in range(3):
+            set_servo_angle(8, 90)
+            set_servo_angle(9, 180)
+            time.sleep(0.5)
+            set_servo_angle(8, 0)
+            set_servo_angle(9, 90)
+            time.sleep(0.5)
         time.sleep(0.5)
-        set_servo_angle(8, 0)
-        set_servo_angle(9, 90)
+        set_servo_angle(8, 45)
+        set_servo_angle(9, 0)
+        set_servo_angle(2, 180-45)
+        time.sleep(1)
+        shutdown_all_servos()
         time.sleep(0.5)
-    time.sleep(0.5)
-    set_servo_angle(8, 45)
-    set_servo_angle(9, 0)
-    set_servo_angle(2, 180-45)
-    time.sleep(1)
-    shutdown_all_servos()
-    time.sleep(0.5)
-    for _ in range(6):
-        GPIO.output(GPIO_LED_L, GPIO.HIGH)
-        GPIO.output(GPIO_LED_R, GPIO.HIGH)
-        time.sleep(0.3)
-        GPIO.output(GPIO_LED_L, GPIO.LOW)
-        GPIO.output(GPIO_LED_R, GPIO.LOW)
-        time.sleep(0.3)
+        for _ in range(6):
+            GPIO.output(GPIO_LED_L, GPIO.HIGH)
+            GPIO.output(GPIO_LED_R, GPIO.HIGH)
+            time.sleep(0.3)
+            GPIO.output(GPIO_LED_L, GPIO.LOW)
+            GPIO.output(GPIO_LED_R, GPIO.LOW)
+            time.sleep(0.3)
+            GPIO.cleanup()
+
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+        shutdown_all_servos()
