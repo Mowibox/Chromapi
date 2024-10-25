@@ -73,6 +73,7 @@ if __name__ == "__main__":
     set_servo_angle(10, 180)
     set_servo_angle(11, 180)
     set_servo_angle(3, 180)
+    set_servo_angle(1, 0)
     time.sleep(1)
     for _ in range(3):
         set_servo_angle(8, 90)
