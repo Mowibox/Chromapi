@@ -18,12 +18,12 @@ Where 'user' is the username specified in the Raspberry Pi Imager configuration,
 
 More infos: https://pimylifeup.com/raspberry-pi-ip-address/
 
-Once connected to the Raspberry Pi, I launch the updates:
+Once connected to the Raspberry Pi, I upgraded the packages:
 
 ```
 sudo apt update && sudo apt upgrade
 ```
-As Ubuntu does not have raspi-config natively, we have to install it manually:
+As Ubuntu does not have raspi-config natively, I have to install it manually:
 
 ```
 sudo apt-get install raspi-config
