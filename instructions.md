@@ -31,7 +31,7 @@ sudo apt-get install raspi-config
 ```
 This allows me access to the Raspberry's configurations:
 ```
-sudo rapsi-config
+sudo raspi-config
 ```
 Here are the parameters I modified/enabled:
 * Interface options > Legacy camera
