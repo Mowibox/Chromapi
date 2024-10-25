@@ -68,7 +68,7 @@ sudo reboot
 
 To run my python codes I installed pip:
 ```
-sudo apt-get install git python3-pip
+sudo apt-get install python3-pip
 ```
 
 I then installed zram-tools for reducing swap: 
