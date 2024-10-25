@@ -28,7 +28,7 @@ GPIO.output(GPIO_LED_L, GPIO.LOW)
 GPIO.output(GPIO_LED_R, GPIO.LOW)
 
 NUM_OF_CHANNELS = 16
-DISTANCE_THRESHOLD = 15
+DISTANCE_THRESHOLD = 10
 
 val = 0
 still_goal = False
@@ -69,7 +69,7 @@ def get_distance() -> float:
         start = time.time()
     
     stop =  time.time()
-    while GPIO.input(GPIO_ECHO) == GPIO.LOW:
+    while GPIO.input(GPIO_ECHO) == GPIO.HIGH:
         stop = time.time()
 
     delta_time = stop - start
@@ -91,24 +91,26 @@ try:
             set_servo_angle(8, 90*(1-val))
             set_servo_angle(9, 90*(2-val))
             val = (val+1)%2
-            time.sleep(0.5)
         else:
             if not(still_goal):
                 set_servo_angle(8, 45)
-                set_servo_angle(9, 45)
-                time.sleep(1)
+                set_servo_angle(9, 0)
+                time.sleep(1.5)
                 servo_shutdown(8)
                 servo_shutdown(9)
                 still_goal = True
             GPIO.output(GPIO_LED_L, GPIO.LOW)
             GPIO.output(GPIO_LED_R, GPIO.LOW)
 
-        time.sleep(1)
+        time.sleep(0.5)
 
 except KeyboardInterrupt:
-    GPIO.cleanup()
+    set_servo_angle(8, 45)
+    set_servo_angle(9, 0)
+    time.sleep(1)
     servo_shutdown(8)
     servo_shutdown(9)
+    GPIO.cleanup()
 
         
 

@@ -98,7 +98,7 @@ if __name__ == "__main__":
             GPIO.output(GPIO_LED_L, GPIO.LOW)
             GPIO.output(GPIO_LED_R, GPIO.LOW)
             time.sleep(0.3)
-            GPIO.cleanup()
+        GPIO.cleanup()
 
     except KeyboardInterrupt:
         GPIO.cleanup()
