@@ -30,8 +30,9 @@ def generate_frames():
     Generates the frames for the camera stream
     """
     camera = cv2.VideoCapture(0)
-    camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640//2)
+    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480//2)
+    camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
 
     # Variables for FPS
     prev_frame_time = 0
@@ -56,7 +57,7 @@ def generate_frames():
         cpu_temp_text = f"T = {cpu_temp}"
         cv2.putText(frame, cpu_temp_text, (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (65, 55, 255), 2, cv2.LINE_AA)
 
-        ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 50])
+        ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 90])
         if not ret:
             continue
         
